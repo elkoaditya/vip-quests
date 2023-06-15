@@ -1,0 +1,1 @@
+@livewire('root.index')
