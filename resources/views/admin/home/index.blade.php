@@ -12,7 +12,7 @@
     <script src="{{asset('material')}}/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script>
         var table = $('#table-vip').DataTable({
-            'iDisplayLength': 100
+            'iDisplayLength': 150
         });
     </script>
 @endsection
