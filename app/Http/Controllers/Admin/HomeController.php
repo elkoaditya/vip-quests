@@ -37,7 +37,12 @@ class HomeController extends Controller
     }
     public function showVip(Request $request) {
         $quest= QuestVip::where('id', $request->id)->first();
-        broadcast(new \App\Events\TriggerRoot($quest->name, $quest->jabatan, $request->panggilan));
+        if ($request->panggilan == null) {
+            $panggilan = '';
+        } else {
+            $panggilan = $request->panggilan;
+        }
+        broadcast(new \App\Events\TriggerRoot($quest->name, $quest->jabatan, $panggilan));
         Alert::simple('success', 'Berhasil menampilkan vip');
         return redirect()->back();
     }
