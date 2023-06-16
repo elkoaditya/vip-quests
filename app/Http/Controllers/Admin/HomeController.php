@@ -6,8 +6,10 @@ use App\Events\TriggerRoot;
 use App\Helper\Alert;
 use App\Helper\ValidatorHelper;
 use App\Http\Controllers\Controller;
+use App\Imports\VipImport;
 use App\Models\QuestVip;
 use Illuminate\Http\Request;
+use Excel;
 
 class HomeController extends Controller
 {
@@ -38,5 +40,18 @@ class HomeController extends Controller
         broadcast(new \App\Events\TriggerRoot($quest->name, $quest->jabatan));
         Alert::simple('success', 'Berhasil menampilkan vip');
         return true;
+    }
+    public function importVip(Request $request) {
+        $validator = new ValidatorHelper($request, [
+            'file' => 'required|file|mimes:xlsx,xls',
+        ]);
+        if ($validator->isValid()) return redirect()->back();
+        try {
+            Excel::import(new VipImport(), $request->file('file')->store('temp'));
+            return redirect()->back();
+        } catch (\Exception $err) {
+            Alert::simple('danger', $err->getMessage());
+            return redirect()->back();
+        }
     }
 }

@@ -11,16 +11,23 @@
 @section('js')
     <script src="{{asset('material')}}/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script>
-        var table = $('#table-vip').DataTable({});
+        var table = $('#table-vip').DataTable({
+            'iDisplayLength': 100
+        });
     </script>
 @endsection
 {{----------------------------------------------------------------------}}
 @section('body')
     <div class="card">
         <div class="card-body">
-            <x-modal-button id="create-vip" >
-                <button  class="btn btn-success">Add Vip</button>
-            </x-modal-button>
+            <div class="d-flex">
+                <x-modal-button id="create-vip" >
+                    <button  class="btn btn-success me-3">Add Vip</button>
+                </x-modal-button>
+                <x-modal-button id="import-vip">
+                    <button  class="btn btn-info">Import Vip</button>
+                </x-modal-button>
+            </div>
             <div class="card-datatable table-responsive pt-0">
                 <table class="datatables-basic table table-bordered" id="table-vip">
                     <thead>
@@ -40,17 +47,17 @@
                             <td>{{$quest->jabatan}}</td>
                             <td>
                                 <x-sweet-alert
-                                    title="Logout"
-                                    text="Apakah anda yakin untuk logout"
+                                    title="Show Welcome"
+                                    text="Apakah anda yakin untuk menjalankan fitur ini?"
                                     icon="info"
-                                    confirmtext="Logout"
+                                    confirmtext="Run"
                                     confirmcolor="success"
                                     confirmicon="success"
                                     confirmresult="Anda berhasil logout"
                                     canceltext="batal"
                                     cancelcolor="danger"
                                     cancelicon="warning"
-                                    cancelresult="batal logout"
+                                    cancelresult="batal runing"
                                     redirect="/admin/home"
                                     url="/admin/home/show-vip"
                                     :body="[
@@ -74,6 +81,22 @@
             <x-input type="text" name="jabatan" placeholder="Jabatan tamu VIP" />
             <div class="col-12 text-center">
                 <button type="submit" class="btn btn-primary me-sm-3 me-1">Simpan</button>
+                <button
+                    type="reset"
+                    class="btn btn-outline-secondary"
+                    data-bs-dismiss="modal"
+                    aria-label="Close">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </x-modal>
+    <x-modal id="import-vip" header="Import Tamu VIP by Excel" body="Silahkan download template dibawah ini dan upload ulang">
+        <a href="/template.xlsx" class="btn btn-success m-2 mb-3">Download Template</a>
+        <form method="post" action="/admin/home/import-vip" novalidate enctype="multipart/form-data">@csrf
+            <x-input type="file" name="file" placeholder="Upload Excel" />
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-info me-sm-3 me-1">Import</button>
                 <button
                     type="reset"
                     class="btn btn-outline-secondary"

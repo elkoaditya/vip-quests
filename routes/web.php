@@ -14,6 +14,7 @@ Route::group([
     Route::get('/home', [\App\Http\Controllers\Admin\HomeController::class, 'index']);
     Route::post('/home/add-vip', [\App\Http\Controllers\Admin\HomeController::class, 'addVip']);
     Route::post('/home/show-vip', [\App\Http\Controllers\Admin\HomeController::class, 'showVip']);
+    Route::post('/home/import-vip', [\App\Http\Controllers\Admin\HomeController::class, 'importVip']);
 });
 
 Route::get('/test', function (){
