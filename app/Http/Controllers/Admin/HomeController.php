@@ -37,9 +37,9 @@ class HomeController extends Controller
     }
     public function showVip(Request $request) {
         $quest= QuestVip::where('id', $request->id)->first();
-        broadcast(new \App\Events\TriggerRoot($quest->name, $quest->jabatan));
+        broadcast(new \App\Events\TriggerRoot($quest->name, $quest->jabatan, $request->panggilan));
         Alert::simple('success', 'Berhasil menampilkan vip');
-        return true;
+        return redirect()->back();
     }
     public function importVip(Request $request) {
         $validator = new ValidatorHelper($request, [

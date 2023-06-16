@@ -14,16 +14,18 @@ class TriggerRoot implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     public string $nama;
-    public string $jabatan;
-    public function __construct($nama, $jabatan)
+    public string $jabatan, $panggilan;
+    public function __construct($nama, $jabatan, $panggilan)
     {
         $this->jabatan = $jabatan;
         $this->nama = $nama;
+        $this->panggilan = $panggilan;
     }
     public function broadcastWith():array {
         return [
             'nama' => $this->nama,
             'jabatan' => $this->jabatan,
+            'panggilan' => $this->panggilan,
         ];
     }
     public function broadcastOn()

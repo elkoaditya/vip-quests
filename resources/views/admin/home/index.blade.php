@@ -46,26 +46,14 @@
                             <td>{{$quest->name}}</td>
                             <td>{{$quest->jabatan}}</td>
                             <td>
-                                <x-sweet-alert
-                                    title="Show Welcome"
-                                    text="Apakah anda yakin untuk menjalankan fitur ini?"
-                                    icon="info"
-                                    confirmtext="Run"
-                                    confirmcolor="success"
-                                    confirmicon="success"
-                                    confirmresult="Anda berhasil logout"
-                                    canceltext="batal"
-                                    cancelcolor="danger"
-                                    cancelicon="warning"
-                                    cancelresult="batal runing"
-                                    redirect="/admin/home"
-                                    url="/admin/home/show-vip"
-                                    :body="[
+                                <?php
+                                    $values = [
                                         'id' => $quest->id,
-                                    ]"
-                                >
+                                    ];
+                                ?>
+                                <x-modal-button id="show-vip" :values="$values" >
                                     <button class="btn btn-success">Show Welcome</button>
-                                </x-sweet-alert>
+                                </x-modal-button>
                             </td>
                         </tr>
                     @endforeach
@@ -95,6 +83,33 @@
         <a href="/template.xlsx" class="btn btn-success m-2 mb-3">Download Template</a>
         <form method="post" action="/admin/home/import-vip" novalidate enctype="multipart/form-data">@csrf
             <x-input type="file" name="file" placeholder="Upload Excel" />
+            <div class="col-12 text-center">
+                <button type="submit" class="btn btn-info me-sm-3 me-1">Import</button>
+                <button
+                    type="reset"
+                    class="btn btn-outline-secondary"
+                    data-bs-dismiss="modal"
+                    aria-label="Close">
+                    Cancel
+                </button>
+            </div>
+        </form>
+    </x-modal>
+    <x-modal id="show-vip" header="Run VIP" body="Silahkan pilih jenis panggilan">
+        <form method="post" action="/admin/home/show-vip">@csrf
+            <x-input type="hidden" name="id" id="id" />
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="panggilan" id="flexRadioDefault1" value="Ibu">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    Ibu
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="panggilan" id="flexRadioDefault2" value="Bapak">
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Bapak
+                </label>
+            </div>
             <div class="col-12 text-center">
                 <button type="submit" class="btn btn-info me-sm-3 me-1">Import</button>
                 <button

@@ -88,15 +88,21 @@
             <div class="text-top">
                 <div style="width: 80vmin">
                     <span style="font-size: 70px" align="center">Selamat Datang </span>
-                    <span style="font-size: 50px" align="center">Kepada </span>
-                    <span style="font-size: 80px; font-weight: bold !important; color: black;" align="center">{{$nama}}</span>
+                    <span style="font-size: 50px" align="center">Kepada Yth </span>
+                    <span style="font-size: 80px; font-weight: bold !important; color: black;" align="center">{{$panggilan}} {{$nama}}</span>
                 </div>
             </div>
 
             <div class="text-bottom" align="center">
                 <div style="text-align: center;">
                     <center>
-                        <span style="font-size: 50px; width: 80vmin; display: block" align="center">Selaku {{$jabatan}}</span>
+                        <span style="font-size: 50px; width: 80vmin; display: block" align="center">Selaku
+                            @if($jabatan == '-')
+                                Tamu Undangan
+                            @else
+                                {{$jabatan}}
+                            @endif
+                        </span>
                     </center>
                 </div>
             </div>

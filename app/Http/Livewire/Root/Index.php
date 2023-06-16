@@ -8,7 +8,7 @@ class Index extends Component
 {
     protected $listeners = ['echo:root,TriggerRoot' => 'notifyNewOrder'];
     public string $nama;
-    public string $jabatan;
+    public string $jabatan, $panggilan;
     public bool $show;
 
     public function notifyNewOrder($data)
@@ -19,6 +19,7 @@ class Index extends Component
 
         $this->nama = $data['nama'];
         $this->jabatan = $data['jabatan'];
+        $this->panggilan = $data['panggilan'];
         $this->show = true;
     }
     public function render()
