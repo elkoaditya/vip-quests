@@ -37,7 +37,7 @@
                 position: absolute;
                 top: 50%;
                 transform: translate(-50%, -50%);
-                width: 90vmin;
+                width:80vmin;
             }
             .animated-title > div {
                 height: 50%;
@@ -64,7 +64,7 @@
                 bottom: 0;
                 transform: translate(0, 100%);
             }
-            .animated-title > div.text-top div span:first-child {
+            .animated-title > div.text-top div {
                 color: #767676;
             }
             .animated-title > div.text-bottom {
@@ -86,15 +86,18 @@
     <div wire:loading.remove>
         <div class="animated-title">
             <div class="text-top">
-                <div>
-                    <span>Selamat Datang</span>
-                    <center><span>{{$nama}}</span></center>
+                <div style="width: 80vmin">
+                    <span style="font-size: 70px" align="center">Selamat Datang </span>
+                    <span style="font-size: 50px" align="center">Kepada </span>
+                    <span style="font-size: 80px; font-weight: bold !important; color: black;" align="center">{{$nama}}</span>
                 </div>
             </div>
 
-            <div class="text-bottom">
-                <div>
-                    {{$jabatan}}
+            <div class="text-bottom" align="center">
+                <div style="text-align: center;">
+                    <center>
+                        <span style="font-size: 50px; width: 80vmin; display: block" align="center">Selaku {{$jabatan}}</span>
+                    </center>
                 </div>
             </div>
         </div>
